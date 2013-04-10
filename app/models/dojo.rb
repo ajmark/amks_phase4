@@ -10,9 +10,9 @@ class Dojo < ActiveRecord::Base
   validates_uniqueness_of :name, :case_sensitive => false
 
   #Scopes
-  scope :active, where('dojos.active = ?', true)
-  scope :inactive, where('dojos.active = ?', false)
-  scope :alphabetical, order('dojo.name')
+  scope :active, where('active = ?', true)
+  scope :inactive, where('active = ?', false)
+  scope :alphabetical, order('name')
 
   #Methods
 

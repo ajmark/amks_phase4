@@ -101,4 +101,16 @@ class ActiveSupport::TestCase
     @t2.destroy
   end 
 
+  def create_dojo_context
+    @cmu = FactoryGirl.create(:dojo)
+    @pitt = FactoryGirl.create(:dojo, :name => "UPitt Dojo", :street => "4200 Forbes Ave", :zip => "15213")
+    @joes = FactoryGirl.create(:dojo, :name => "Average Joe's Dojo", :active => false)
+  end 
+
+  def remove_dojo_context 
+    @cmu.destroy
+    @pitt.destroy
+    @joes.destroy
+  end 
+
 end
