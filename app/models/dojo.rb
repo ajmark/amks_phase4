@@ -1,4 +1,5 @@
 class Dojo < ActiveRecord::Base
+  before_save :find_dojo_coordinates
   attr_accessible :active, :city, :latitude, :longitude, :name, :state, :street, :zip
 
   #Relationships
@@ -15,6 +16,17 @@ class Dojo < ActiveRecord::Base
   scope :alphabetical, order('name')
 
   #Methods
+
+  def find_dojo_coordinates
+  coord = Geocoder.coordinates("#{street}, #{city}, #{state}, #{zip}")
+  if coord
+    self.latitude = coord[0]
+    self.longitude = coord[1]
+  else 
+    errors.add(:base, "Error with geocoding")
+  end
+  coord
+end
 
   ####TODO####
   #4,6
