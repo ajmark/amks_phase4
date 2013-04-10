@@ -8,11 +8,11 @@ class DojoStudent < ActiveRecord::Base
   #Validations
   validates_presence_of :dojo_id, :student_id, :start_date
   validates_numericality_of :dojo_id, :student_id
-  validates_date :start_date
-  validates_date :end_date
+  validates_date :start_date, :on_or_before => Date.today
+  validates_date :end_date, :after => :start_date, allow_blank: true 
 
   #Scopes
-  #scope :current, where()
+  scope :current, where('end_date = ?', nil)
   scope :by_student, joins(:student).order('last_name, first_name')
   scope :by_dojo, joins(:dojo).order('name')
 

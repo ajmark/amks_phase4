@@ -51,9 +51,9 @@ class ActiveSupport::TestCase
   
   # Context for sections (requires events)
   def create_section_context
-    @wy_belt_sparring = FactoryGirl.create(:section, :event => @sparring)
-    @wy_belt_breaking = FactoryGirl.create(:section, :event => @breaking)
-    @r_belt_breaking = FactoryGirl.create(:section, :event => @breaking, :min_rank => 8, :max_rank => 10, :min_age => 13, :max_age => 15)
+    @wy_belt_sparring = FactoryGirl.create(:section, :event => @sparring, :location => 'Wiegand')
+    @wy_belt_breaking = FactoryGirl.create(:section, :event => @breaking, :location => 'Skibo')
+    @r_belt_breaking = FactoryGirl.create(:section, :event => @breaking, :min_rank => 8, :max_rank => 10, :min_age => 13, :max_age => 15, :location => 'Skibo')
     @r_belt_sparring = FactoryGirl.create(:section, :event => @sparring, :min_rank => 8, :max_rank => 10, :min_age => 13, :max_age => 15, :active => false)
     @bl_belt_breaking = FactoryGirl.create(:section, :event => @breaking, :min_rank => 11, :max_rank => nil, :min_age => 18, :max_age => nil)
   end
@@ -111,6 +111,20 @@ class ActiveSupport::TestCase
     @cmu.destroy
     @pitt.destroy
     @joes.destroy
+  end 
+
+  def create_dojo_student_context
+    @ds_ed = FactoryGirl.create(:dojo_student, :dojo => @cmu, :student => @ed)
+    @ds_jen = FactoryGirl.create(:dojo_student, :dojo => @pitt, :student => @jen, :start_date => 3.years.ago, :end_date => 1.year.ago)
+    @ds_jen2 = FactoryGirl.create(:dojo_student, :dojo => @cmu, :student => @jen, :start_date => 10.months.ago)
+    @ds_jason = FactoryGirl.create(:dojo_student, :dojo => @pitt, :student => @jason)
+  end 
+
+  def remove_dojo_student_context 
+    @ds_ed.destroy
+    @ds_jen.destroy
+    @ds_jen2.destroy
+    @ds_jason.destroy
   end 
 
 end

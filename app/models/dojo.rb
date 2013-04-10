@@ -29,6 +29,6 @@ class Dojo < ActiveRecord::Base
 end
 
   ####TODO####
-  #4,6
+  #6
   
 end

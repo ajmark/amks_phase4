@@ -143,5 +143,10 @@ class SectionTest < ActiveSupport::TestCase
       assert_equal ["rank:1 - age:9", "rank:8 - age:13", "rank:11 - age:18"], Section.for_event(@breaking.id).alphabetical.map{|s| "rank:#{s.min_rank} - age:#{s.min_age}"}
       assert_equal ["rank:1 - age:9", "rank:8 - age:13"], Section.for_event(@sparring.id).alphabetical.map{|s| "rank:#{s.min_rank} - age:#{s.min_age}"}
     end
+
+    # should "have scope to show all sections for a particular location" do 
+    #   assert_equal [""], Section.for_location('Skibo').alphabetical.map{|s| "event:#{s.event.name}: - rank:#{s.min_rank} - age:#{s.min_age}"}
+    # end 
+    
   end
 end

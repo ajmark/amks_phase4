@@ -47,4 +47,10 @@ FactoryGirl.define do
     active true
   end 
 
+  factory :dojo_student do
+    association :dojo
+    association :student
+    start_date 1.year.ago
+  end 
+
 end
