@@ -55,11 +55,13 @@ class SectionTest < ActiveSupport::TestCase
   context "Creating context for sections" do
     setup do
       create_event_context
+      create_tournament_context
       create_section_context
     end
     
     teardown do
       remove_event_context
+      remove_tournament_context
       remove_section_context
     end
     

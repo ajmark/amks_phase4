@@ -15,7 +15,7 @@ class Tournament < ActiveRecord::Base
   scope :alphabetical, order('name')
   scope :past, where('date < ?', Time.now)
   scope :upcoming, where('date > ?', Time.now)
-  scope :next, lambda { |i| order('date').limit(i) }
+  scope :next, lambda { |i| where('date > ?', Time.now).order('date').limit(i) }
   scope :active, where('tournaments.active = ?', true)
   scope :inactive, where('tournaments.active = ?', false)
 

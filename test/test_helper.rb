@@ -82,4 +82,23 @@ class ActiveSupport::TestCase
     @reg_nm_br.destroy
     @reg_hm_br.destroy
   end
+
+  def create_tournament_context
+    @bob_memorial = FactoryGirl.create(:tournament)
+    @steel_city_annual = FactoryGirl.create(:tournament, :name => "Steel City Annual", :date => 2.weeks.ago.to_date, :min_rank => 5, :max_rank => 9)
+    @pittsburgh_invitational = FactoryGirl.create(:tournament, :name => "Pittsburgh Invitational", :date => 1.month.from_now.to_date, :min_rank => 10)
+    @inactive_tournament = FactoryGirl.create(:tournament, :name => "Inactive", :active => false)
+    @t1 = FactoryGirl.create(:tournament, :name => "T1", :date => 1.day.from_now)
+    @t2 = FactoryGirl.create(:tournament, :name => "T2", :date => 1.week.from_now)
+  end 
+
+  def remove_tournament_context
+    @bob_memorial.destroy
+    @steel_city_annual.destroy
+    @pittsburgh_invitational.destroy
+    @inactive_tournament.destroy
+    @t1.destroy
+    @t2.destroy
+  end 
+
 end

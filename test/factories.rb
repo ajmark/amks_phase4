@@ -28,4 +28,12 @@ FactoryGirl.define do
     association :student
     date Date.today
   end
+
+  factory :tournament do
+    name "Bob Memorial Tournament"
+    min_rank 4
+    date Date.today
+    active true 
+  end
+
 end
