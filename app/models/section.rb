@@ -3,6 +3,7 @@ class Section < ActiveRecord::Base
   
   # Relationships
   belongs_to :event
+  belongs_to :tournament
   has_many :registrations
   has_many :students, :through => :registrations
   

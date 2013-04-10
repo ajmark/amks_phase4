@@ -3,6 +3,7 @@ require 'test_helper'
 class SectionTest < ActiveSupport::TestCase
   # Shoulda macros
   should belong_to(:event)
+  should belong_to(:tournament)
   should have_many(:registrations)
   should have_many(:students).through(:registrations)
   

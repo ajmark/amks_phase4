@@ -11,7 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121225230329) do
+ActiveRecord::Schema.define(:version => 20130410110242) do
+
+  create_table "dojo_students", :force => true do |t|
+    t.integer  "dojo_id"
+    t.integer  "student_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "dojos", :force => true do |t|
+    t.string   "name"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "active"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "events", :force => true do |t|
     t.string   "name"
@@ -34,9 +56,11 @@ ActiveRecord::Schema.define(:version => 20121225230329) do
     t.integer  "max_age"
     t.integer  "min_rank"
     t.integer  "max_rank"
-    t.boolean  "active",     :default => true
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.boolean  "active",        :default => true
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.integer  "tournament_id"
+    t.string   "location"
   end
 
   create_table "students", :force => true do |t|
@@ -49,6 +73,26 @@ ActiveRecord::Schema.define(:version => 20121225230329) do
     t.boolean  "active",        :default => true
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+  end
+
+  create_table "tournaments", :force => true do |t|
+    t.string   "name"
+    t.date     "date"
+    t.integer  "min_rank"
+    t.integer  "max_rank"
+    t.boolean  "active"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "password_digest"
+    t.integer  "student_id"
+    t.string   "role"
+    t.boolean  "active"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
 end
