@@ -16,7 +16,8 @@ class Dojo < ActiveRecord::Base
   scope :alphabetical, order('name')
 
   #Methods
-
+  
+  private
   def find_dojo_coordinates
   coord = Geocoder.coordinates("#{street}, #{city}, #{state}, #{zip}")
   if coord
