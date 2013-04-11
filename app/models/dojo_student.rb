@@ -12,10 +12,13 @@ class DojoStudent < ActiveRecord::Base
   validates_date :end_date, :after => :start_date, allow_blank: true 
 
   #Scopes
-  scope :current, where('end_date = ?', nil)
+  scope :current, where('end_date is null')
   scope :by_student, joins(:student).order('last_name, first_name')
   scope :by_dojo, joins(:dojo).order('name')
 
   #Methods
+  def end_previous_assignment do 
+    
+  end 
   
 end

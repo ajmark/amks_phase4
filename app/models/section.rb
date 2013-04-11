@@ -11,7 +11,9 @@ class Section < ActiveRecord::Base
   scope :for_event, lambda {|event_id| where("event_id = ?", event_id) }
   scope :for_rank, lambda {|desired_rank| where("min_rank <= ? and (max_rank >= ? or max_rank is null)", desired_rank, desired_rank) }
   scope :for_age, lambda {|desired_age| where("min_age <= ? and (max_age >= ? or max_age is null)", desired_age, desired_age) }
-  # scope :for_location, lamba {|location| where("location = ?", location) }
+  scope :for_location, lambda {|location| where("location = ?", location) }
+  scope :by_location, order('location')
+  scope :for_tournament, lambda {|id| where("tournament_id = ?", id) }
   scope :active, where('sections.active = ?', true)
   scope :inactive, where('sections.active = ?', false)
   scope :alphabetical, joins(:event).order('events.name, min_rank, min_age')

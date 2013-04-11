@@ -37,7 +37,7 @@ class DojoStudentTest < ActiveSupport::TestCase
 	#Scopes
 
 		should "have scope to gather active records only" do 
-			assert_equal [""], DojoStudent.current.map{|a| a.student.name}
+			assert_equal ["Gruberman, Ed", "Hanson, Jen", "Hoover, Jason"], DojoStudent.current.map{|a| a.student.name}
 		end 
 
 		should "have scope to order records by student last and first names" do 
