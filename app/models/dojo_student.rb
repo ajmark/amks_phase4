@@ -1,5 +1,5 @@
 class DojoStudent < ActiveRecord::Base
-  before_save :end_previous_assignment
+  #before_save :end_previous_assignment
   attr_accessible :dojo_id, :end_date, :start_date, :student_id
 
   #Relationships
