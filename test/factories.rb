@@ -41,7 +41,7 @@ FactoryGirl.define do
     city "Pittsburgh"
     latitude 1.0 
     longitude 1.0 
-    state "Pennsylvania"
+    state "PA"
     street "5000 Forbes Ave"
     zip "15289"
     active true

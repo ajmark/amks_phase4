@@ -12,6 +12,9 @@ class Registration < ActiveRecord::Base
   scope :by_student, joins(:student).order('last_name, first_name')
   scope :by_date, order('date')
   scope :by_event_name, joins(:section, :event).order('events.name')
+  scope :paid, where("fee_paid = ?", true)
+  scope :unpaid, where("fee_paid = ?", false)
+  scope :by_final_standing, lambda {|section_id| where("section_id = ?", section_id).order('final_standing').limit(3) }
   
   # Validations
   validates_date :date, :on_or_before => lambda { Date.current }, :on_or_before_message => "cannot be in the future"

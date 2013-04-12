@@ -18,8 +18,7 @@ class DojoStudent < ActiveRecord::Base
   scope :by_dojo, joins(:dojo).order('name')
 
   #Methods
-  def end_previous_assignment do 
-    if ()
+  def end_previous_assignment 
   end 
   
 end

@@ -9,6 +9,37 @@ class DojoTest < ActiveSupport::TestCase
 	#Validations
 	should validate_presence_of(:name)
 
+	#City validations
+	should allow_value("Pittsburgh").for(:city)
+	should allow_value("San Francisco").for(:city)
+	should allow_value("The Coolest City Ever").for(:city)
+	should allow_value("St. Pierre").for(:city)
+	should_not allow_value(10).for(:city)
+	should_not allow_value("@city").for(:city)
+	should_not allow_value("Mt/Fuji").for(:city)
+
+	#Street Validations
+	should allow_value("30 Lydia Ct.").for(:street)
+	should allow_value("St. James Place").for(:street)
+	should allow_value("Street").for(:street)
+	should_not allow_value("5").for(:street)
+	should_not allow_value("/street").for(:street)
+
+	#Zip Validations
+	should allow_value("94010").for(:zip)
+	should allow_value("94010-0000").for(:zip)
+	should_not allow_value("123").for(:zip)
+	should_not allow_value("Hello").for(:zip)
+	should_not allow_value("123456").for(:zip)
+
+	#State Validations
+ 	should allow_value("PA").for(:state)
+ 	should allow_value("WV").for(:state)
+ 	should allow_value("OH").for(:state)
+ 	should_not allow_value("bad").for(:state)
+ 	should_not allow_value(10).for(:state)
+ 	should_not allow_value("CA").for(:state)
+	
 	context "Creating Dojo context" do 
 		setup do 
 			create_dojo_context

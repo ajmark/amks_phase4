@@ -68,11 +68,11 @@ class ActiveSupport::TestCase
   
   # Context for registrations (requires sections, students)
   def create_registration_context
-    @reg_ed_sp = FactoryGirl.create(:registration, :student => @ed, :section => @wy_belt_sparring)
-    @reg_ted_sp = FactoryGirl.create(:registration, :student => @ted, :section => @wy_belt_sparring)
-    @reg_ted_br = FactoryGirl.create(:registration, :student => @ted, :section => @wy_belt_breaking)
-    @reg_hm_br = FactoryGirl.create(:registration, :student => @howard, :section => @r_belt_breaking, :date => 1.day.ago.to_date)
-    @reg_nm_br = FactoryGirl.create(:registration, :student => @noah, :section => @r_belt_breaking, :date => 2.days.ago.to_date)
+    @reg_ed_sp = FactoryGirl.create(:registration, :student => @ed, :section => @wy_belt_sparring, :fee_paid => true, :final_standing => 1)
+    @reg_ted_sp = FactoryGirl.create(:registration, :student => @ted, :section => @wy_belt_sparring, :fee_paid => false, :final_standing => 2)
+    @reg_ted_br = FactoryGirl.create(:registration, :student => @ted, :section => @wy_belt_breaking, :fee_paid => true)
+    @reg_hm_br = FactoryGirl.create(:registration, :student => @howard, :section => @r_belt_breaking, :date => 1.day.ago.to_date, :fee_paid => true, :final_standing => 1)
+    @reg_nm_br = FactoryGirl.create(:registration, :student => @noah, :section => @r_belt_breaking, :date => 2.days.ago.to_date, :fee_paid => false, :final_standing => 2)
   end
   
   def remove_registration_context

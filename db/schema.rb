@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410110242) do
+ActiveRecord::Schema.define(:version => 20130411045857) do
 
   create_table "dojo_students", :force => true do |t|
     t.integer  "dojo_id"
@@ -46,8 +46,10 @@ ActiveRecord::Schema.define(:version => 20130410110242) do
     t.integer  "section_id"
     t.integer  "student_id"
     t.date     "date"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.boolean  "fee_paid"
+    t.integer  "final_standing"
   end
 
   create_table "sections", :force => true do |t|

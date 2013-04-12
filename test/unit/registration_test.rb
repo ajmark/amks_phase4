@@ -79,6 +79,18 @@ class RegistrationTest < ActiveSupport::TestCase
       assert_equal 1, Registration.for_section(@wy_belt_breaking.id).size
       assert_equal 0, Registration.for_section(@bl_belt_breaking.id).size
     end
+
+    should "have scope to get all paid registrations" do 
+      assert_equal ["Ed", "Ted", "Howard"], Registration.paid.map{|r| r.student.first_name}
+    end 
+
+    should "have scope to get all unpaid registrations" do 
+      assert_equal ["Ted", "Noah"], Registration.unpaid.map{|r| r.student.first_name}
+    end 
+
+    should "have scope to get results of a section" do 
+      assert_equal ["1: Ed", "2: Ted"], Registration.by_final_standing(1).map{|r| "#{r.final_standing}: #{r.student.first_name}"}
+    end 
     
     # Test special validations
     # validate :student_is_appropriate_rank
