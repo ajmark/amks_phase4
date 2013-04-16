@@ -19,6 +19,10 @@ class DojoStudent < ActiveRecord::Base
 
   #Methods
   def end_previous_assignment 
+    assignments = self.student.dojo_students
+    previous = assignments.select{ |ds| ds.end_date.nil? }.first
+    previous.end_date = Date.today
+    previous.save! 
   end 
   
 end

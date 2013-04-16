@@ -127,4 +127,12 @@ class ActiveSupport::TestCase
     @ds_jason.destroy
   end 
 
+  def create_user_context
+    @user_stu = FactoryGirl.create(:user)
+  end 
+
+  def remove_user_context
+    @user_stu.destroy
+  end 
+
 end

@@ -53,4 +53,11 @@ FactoryGirl.define do
     start_date 1.year.ago
   end 
 
+  factory :user do 
+    email 'student@gmail.com'
+    password 'password'
+    password_confirmation 'password'
+    role 'member'
+  end 
+
 end

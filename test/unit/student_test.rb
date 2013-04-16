@@ -4,6 +4,9 @@ class StudentTest < ActiveSupport::TestCase
   # Test relationships
   should have_many(:registrations)
   should have_many(:sections).through(:registrations)
+  should have_many(:dojo_students)
+  should have_many(:dojos).through(:dojo_students)
+  should have_one(:user)
   
   # Test basic validations
   should validate_presence_of(:first_name)

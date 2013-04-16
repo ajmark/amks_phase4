@@ -88,7 +88,7 @@ class RegistrationTest < ActiveSupport::TestCase
       assert_equal ["Ted", "Noah"], Registration.unpaid.map{|r| r.student.first_name}
     end 
 
-    should "have scope to get results of a section" do 
+    should "have scope to get results of a section by final standing" do 
       assert_equal ["1: Ed", "2: Ted"], Registration.by_final_standing(1).map{|r| "#{r.final_standing}: #{r.student.first_name}"}
     end 
     

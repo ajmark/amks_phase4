@@ -12,7 +12,10 @@ class Student < ActiveRecord::Base
   # Relationships
   has_many :registrations
   has_many :sections, :through => :registrations
-  
+  has_many :dojo_students
+  has_many :dojos, :through => :dojo_students
+  has_one :user 
+
   # Scopes
   scope :alphabetical, order('last_name, first_name')
   scope :by_rank, order('rank DESC')
@@ -68,6 +71,9 @@ class Student < ActiveRecord::Base
     high_age ||= 120
     where("date_of_birth between ? and ?", ((high_age+1).years - 1.day).ago.to_date, low_age.years.ago.to_date)
   end
+
+  def current_dojo
+  end 
   
   # Private methods
   private
