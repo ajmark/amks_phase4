@@ -3,7 +3,7 @@ class Registration < ActiveRecord::Base
   
   # Relationships
   belongs_to :section
-  belongs_to :student
+  belongs_to :student, :dependent => :destroy
   has_one :event, :through => :section
   
   # Scopes

@@ -47,4 +47,5 @@ class StudentsController < ApplicationController
     flash[:notice] = "Successfully removed #{@student.proper_name} from karate tournament system"
     redirect_to students_url
   end
+
 end

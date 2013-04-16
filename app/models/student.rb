@@ -39,6 +39,8 @@ class Student < ActiveRecord::Base
   validates_numericality_of :rank, :only_integer => true, :greater_than => 0
   validates_inclusion_of :waiver_signed, :in => [true, false], :message => "must be true or false"
   validates_inclusion_of :active, :in => [true, false], :message => "must be true or false"
+
+  before_destroy :toggle_active_state
   
   # Other methods
   def name
@@ -72,8 +74,8 @@ class Student < ActiveRecord::Base
     where("date_of_birth between ? and ?", ((high_age+1).years - 1.day).ago.to_date, low_age.years.ago.to_date)
   end
 
-  def make_inactive
-    self.active = false
+  def toggle_active_state
+    self.active = !self.active
     self.save!
   end
   

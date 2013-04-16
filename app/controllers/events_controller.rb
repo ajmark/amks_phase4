@@ -41,7 +41,8 @@ class EventsController < ApplicationController
 
   def destroy
     @event = Event.find(params[:id])
-    @event.destroy
+    
+      @event.destroy
     flash[:notice] = "Successfully removed #{@event.name} from karate tournament system"
     redirect_to events_url
   end

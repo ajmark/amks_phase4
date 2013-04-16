@@ -2,7 +2,7 @@ class Section < ActiveRecord::Base
   attr_accessible :active, :event_id, :min_age, :min_rank, :max_age, :max_rank
   
   # Relationships
-  belongs_to :event
+  belongs_to :event, :dependent => :destroy
   belongs_to :tournament
   has_many :registrations
   has_many :students, :through => :registrations
@@ -28,11 +28,46 @@ class Section < ActiveRecord::Base
 
   validate :event_is_active_in_system
   validate :section_is_not_already_in_system, :on => :create
+  
+  validate :valid_min_rank
+  validate :valid_max_rank
+
+  before_destroy :check_if_destroyable
+  after_rollback :toggle_active_state
 
   # Not needed unless going the long route with registrations
   # def to_s
   #   "#{self.event.name} => #{self.min_rank}-#{self.max_rank} => #{self.min_age}-#{self.max_age}"
   # end
+
+  #Methods
+  def check_if_destroyable
+    if self.registrations.empty?
+      return true
+    else 
+      return false 
+  end 
+
+  def toggle_active_state
+    self.active = !self.active
+    self.save!
+  end 
+
+  def valid_min_rank
+    t_rank = Tournament.min_rank
+    if t_rank <= min_rank 
+      return true
+    else 
+      return false     
+  end 
+
+  def valid_max_rank
+    t_rank = Tournament.max_rank
+    if t_rank >= max_rank
+      return true
+    else 
+      return false 
+  end
 
   private
   def event_is_active_in_system

@@ -46,4 +46,5 @@ class SectionsController < ApplicationController
     flash[:notice] = "Successfully removed #{@section.name} from karate tournament system"
     redirect_to sections_url
   end
+
 end
