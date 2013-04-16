@@ -133,6 +133,11 @@ class StudentTest < ActiveSupport::TestCase
     should "allow ages_between class method to have a nil value for high_age" do 
       assert_equal ["Henderson", "Hoover"], Student.ages_between(18,nil).alphabetical.all.map(&:last_name)
     end
+
+    should "have class method for making student inactive" do 
+      @fred.make_inactive
+      assert_equal ["Gruberman", "Hoover"], Student.inactive.alphabetical.all.map(&:last_name)
+    end 
     
     # start testing scopes...    
     should "have scope for alphabetical listing" do 
@@ -179,6 +184,6 @@ class StudentTest < ActiveSupport::TestCase
       assert_equal ["Hoover","Henderson"], Student.seniors.by_rank.all.map(&:last_name)
     end
 
-    
+
   end
 end
