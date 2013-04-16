@@ -72,8 +72,10 @@ class Student < ActiveRecord::Base
     where("date_of_birth between ? and ?", ((high_age+1).years - 1.day).ago.to_date, low_age.years.ago.to_date)
   end
 
-  def current_dojo
-  end 
+  def make_inactive
+    self.active = false
+    self.save!
+  end
   
   # Private methods
   private

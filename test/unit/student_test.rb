@@ -178,5 +178,7 @@ class StudentTest < ActiveSupport::TestCase
     should "have scope for listing all seniors" do 
       assert_equal ["Hoover","Henderson"], Student.seniors.by_rank.all.map(&:last_name)
     end
+
+    
   end
 end

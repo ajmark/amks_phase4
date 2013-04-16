@@ -1,5 +1,5 @@
 class DojoStudent < ActiveRecord::Base
-  #before_save :end_previous_assignment
+  before_create :end_previous_assignment
   attr_accessible :dojo_id, :end_date, :start_date, :student_id
 
   #Relationships
@@ -19,7 +19,7 @@ class DojoStudent < ActiveRecord::Base
 
   #Methods
   def end_previous_assignment 
-    assignments = self.student.dojo_students
+    assignments = self.student.dojo_students.all
     previous = assignments.select{ |ds| ds.end_date.nil? }.first
     previous.end_date = Date.today
     previous.save! 
