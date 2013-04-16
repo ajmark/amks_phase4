@@ -60,6 +60,11 @@ class DojoTest < ActiveSupport::TestCase
 			deny @bad.valid?
 		end 
 
+    	should "have method to identify geocoordinates" do 
+    	  assert_in_delta(40.44417, @cmu.latitude, 0.00001)
+    	  assert_in_delta(-79.94336, @cmu.longitude, 0.00001)
+    	end 
+
 		#Scopes
 		should "have scope to alphabetize dojos" do 
 			assert_equal ["Average Joe's Dojo", "CMU Dojo", "UPitt Dojo"], Dojo.alphabetical.map{|a| a.name}
@@ -72,8 +77,6 @@ class DojoTest < ActiveSupport::TestCase
 		should "have scope to get all inactive dojos" do 
 			assert_equal ["Average Joe's Dojo"], Dojo.inactive.alphabetical.map{|a| a.name}
 		end 
-
-		#Methods
 
 	end 
 end

@@ -54,4 +54,5 @@ class Section < ActiveRecord::Base
       errors.add(:min_rank, "already has a section for this event, age and rank")
     end
   end
+
 end
