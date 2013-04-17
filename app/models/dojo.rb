@@ -24,21 +24,29 @@ class Dojo < ActiveRecord::Base
   scope :inactive, where('active = ?', false)
   scope :alphabetical, order('name')
 
+  before_destroy :check_if_destroyable
+
   #Methods
   
   private
   def find_dojo_coordinates
   coord = Geocoder.coordinates("#{street}, #{city}, #{state}, #{zip}")
-  if coord
-    self.latitude = coord[0]
-    self.longitude = coord[1]
-  else 
-    errors.add(:base, "Error with geocoding")
-  end
+    if coord
+      self.latitude = coord[0]
+      self.longitude = coord[1]
+    else 
+      errors.add(:base, "Error with geocoding")
+    end
   coord
-end
+  end
 
-  ####TODO####
-  #6
+  def check_if_destroyable
+    if self.students.empty?
+      return true 
+    else 
+      return false 
+    end 
+  end 
+
   
 end

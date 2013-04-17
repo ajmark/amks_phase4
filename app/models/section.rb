@@ -25,6 +25,7 @@ class Section < ActiveRecord::Base
   validates_numericality_of :max_age, :only_integer => true, :greater_than_or_equal_to => :min_age, :allow_blank => true
   validates_numericality_of :event_id, :only_integer => true, :greater_than => 0, :message => "is not a valid event"
   validates_inclusion_of :active, :in => [true, false], :message => "must be true or false"
+  # validates_time :round_time
 
   validate :event_is_active_in_system
   validate :section_is_not_already_in_system, :on => :create

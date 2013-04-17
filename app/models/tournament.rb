@@ -3,6 +3,7 @@ class Tournament < ActiveRecord::Base
 
   #Relationships
   has_many :sections
+  has_many :registrations, :through => :sections
 
   #Validations
   validates_presence_of :name, :date, :min_rank
@@ -19,7 +20,22 @@ class Tournament < ActiveRecord::Base
   scope :active, where('tournaments.active = ?', true)
   scope :inactive, where('tournaments.active = ?', false)
 
-  #### TODO ####### 
-  #Can only be deleted if empty
+  before_destroy :check_if_destroyable
+  after_rollback :toggle_active_state
+
+  private
+  def check_if_destroyable
+    if self.registrations.empty?
+      return true 
+    else 
+      return false
+    end 
+  end 
+  
+  def toggle_active_state
+    self.active = !self.active
+    self.save!
+  end 
+    
 
 end

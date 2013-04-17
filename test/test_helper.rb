@@ -128,7 +128,7 @@ class ActiveSupport::TestCase
   end 
 
   def create_user_context
-    @user_stu = FactoryGirl.create(:user, :student => @ed )
+    @user_stu = FactoryGirl.create(:user, :student => @ed)
   end 
 
   def remove_user_context

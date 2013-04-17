@@ -16,10 +16,16 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :message => "does not match"
   validates_length_of :password, :minimum => 4, :message => "must be at least 4 characters long", :allow_blank => true
 
-  #validates :connected_to_active_user, :on => :create 
+  validate :student_is_active_in_system
 
-
-
-
+  private
+  def student_is_active_in_system
+    # get an array of all active students in the system
+    active_students_ids = Student.active.all.map{|s| s.id}
+    # add error unless the student id of the registration is in the array of active students
+    unless active_students_ids.include?(self.student_id)
+      errors.add(:student, "is not an active student in the system")
+    end
+  end
   
 end

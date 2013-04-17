@@ -4,7 +4,7 @@ class TournamentTest < ActiveSupport::TestCase
 
 	#Relationships
 	should have_many(:sections)
-
+	should have_many(:registrations).through(:sections)
 	#Validations 
 	should validate_presence_of :name
 	should validate_presence_of :date

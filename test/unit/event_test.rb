@@ -3,6 +3,7 @@ require 'test_helper'
 class EventTest < ActiveSupport::TestCase
   # Shoulda macros
   should have_many(:sections)
+  should have_many(:registrations).through(:sections)
   should validate_presence_of(:name)
   should validate_uniqueness_of(:name).case_insensitive
   should allow_value(true).for(:active)
