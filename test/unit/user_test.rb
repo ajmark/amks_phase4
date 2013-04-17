@@ -19,4 +19,16 @@ class UserTest < ActiveSupport::TestCase
 	should allow_value(2).for(:student_id)
 	should_not allow_value("string").for(:student_id)
 
+	context "Creating user context" do 
+		setup do 
+			create_user_context
+		end 
+
+		teardown do 
+			remove_user_context
+		end 
+
+		
+
+	end 
 end

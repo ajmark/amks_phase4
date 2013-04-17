@@ -30,7 +30,7 @@ class TournamentTest < ActiveSupport::TestCase
 	should "have working factories" do 
 		assert_equal "Pittsburgh Invitational", @pittsburgh_invitational.name
 		assert_equal "Bob Memorial Tournament", @bob_memorial.name
-		assert_equal 5, @steel_city_annual.min_rank
+		assert_equal 1, @steel_city_annual.min_rank
 	end 
 
 	should "not allow max rank to be smaller than min rank" do 

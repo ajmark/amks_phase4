@@ -55,10 +55,12 @@ FactoryGirl.define do
   end 
 
   factory :user do 
+    association :student 
     email 'student@gmail.com'
-    password 'password'
-    password_confirmation 'password'
-    role 'member'
+    password "secret"
+    password_confirmation "secret"
+    role "member"
+    active true
   end 
 
 end
