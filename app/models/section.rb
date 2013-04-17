@@ -29,8 +29,11 @@ class Section < ActiveRecord::Base
   validate :event_is_active_in_system
   validate :section_is_not_already_in_system, :on => :create
   
-  validate :valid_min_rank
-  validate :valid_max_rank
+  before_create :valid_min_rank
+  before_create :valid_max_rank
+
+  before_update :valid_min_rank
+  before_update :valid_max_rank
 
   before_destroy :check_if_destroyable
   after_rollback :toggle_active_state
@@ -46,6 +49,7 @@ class Section < ActiveRecord::Base
       return true
     else 
       return false 
+    end 
   end 
 
   def toggle_active_state
@@ -54,19 +58,21 @@ class Section < ActiveRecord::Base
   end 
 
   def valid_min_rank
-    t_rank = Tournament.min_rank
+    t_rank = self.tournament.min_rank
     if t_rank <= min_rank 
       return true
     else 
-      return false     
+      return false  
+    end    
   end 
 
   def valid_max_rank
-    t_rank = Tournament.max_rank
-    if t_rank >= max_rank
+    t_rank = self.tournament.max_rank
+    if t_rank.nil? or t_rank >= max_rank
       return true
     else 
       return false 
+    end 
   end
 
   private

@@ -52,7 +52,7 @@ class ActiveSupport::TestCase
   # Context for sections (requires events)
   def create_section_context
     @wy_belt_sparring = FactoryGirl.create(:section, :event => @sparring, :location => 'Wiegand', :tournament_id => 1)
-    @wy_belt_breaking = FactoryGirl.create(:section, :event => @breaking, :location => 'Baker', :tournament_id => 4)
+    @wy_belt_breaking = FactoryGirl.create(:section, :event => @breaking, :location => 'Baker', :tournament_id => 5)
     @r_belt_breaking = FactoryGirl.create(:section, :event => @breaking, :min_rank => 8, :max_rank => 10, :min_age => 13, :max_age => 15, :location => 'Skibo', :tournament_id => 3)
     @r_belt_sparring = FactoryGirl.create(:section, :event => @sparring, :min_rank => 8, :max_rank => 10, :min_age => 13, :max_age => 15, :active => false, :location => 'Doherty', :tournament_id => 2) 
     @bl_belt_breaking = FactoryGirl.create(:section, :event => @breaking, :min_rank => 11, :max_rank => nil, :min_age => 18, :max_age => nil, :location => 'Wiegand', :tournament_id => 1)
@@ -85,10 +85,10 @@ class ActiveSupport::TestCase
 
   def create_tournament_context
     @bob_memorial = FactoryGirl.create(:tournament)
-    @steel_city_annual = FactoryGirl.create(:tournament, :name => "Steel City Annual", :date => 2.weeks.ago.to_date, :min_rank => 5, :max_rank => 9)
-    @pittsburgh_invitational = FactoryGirl.create(:tournament, :name => "Pittsburgh Invitational", :date => 1.month.from_now.to_date, :min_rank => 10)
+    @steel_city_annual = FactoryGirl.create(:tournament, :name => "Steel City Annual", :date => 2.weeks.ago.to_date, :max_rank => 15)
+    @pittsburgh_invitational = FactoryGirl.create(:tournament, :name => "Pittsburgh Invitational", :date => 1.month.from_now.to_date, :max_rank => 15)
     @inactive_tournament = FactoryGirl.create(:tournament, :name => "Inactive", :active => false)
-    @t1 = FactoryGirl.create(:tournament, :name => "T1", :date => 1.day.from_now)
+    @t1 = FactoryGirl.create(:tournament, :name => "T1", :date => 1.day.from_now, :max_rank => 15)
     @t2 = FactoryGirl.create(:tournament, :name => "T2", :date => 1.week.from_now)
   end 
 

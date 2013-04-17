@@ -31,7 +31,7 @@ FactoryGirl.define do
 
   factory :tournament do
     name "Bob Memorial Tournament"
-    min_rank 4
+    min_rank 1
     date Date.today
     active true 
   end
