@@ -40,8 +40,9 @@ class Student < ActiveRecord::Base
   validates_inclusion_of :waiver_signed, :in => [true, false], :message => "must be true or false"
   validates_inclusion_of :active, :in => [true, false], :message => "must be true or false"
 
-  before_destroy :toggle_active_state
-  
+  before_destroy :false 
+  after_rollback :toggle_active_state
+
   # Other methods
   def name
     "#{last_name}, #{first_name}"

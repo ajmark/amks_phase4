@@ -16,6 +16,7 @@ FactoryGirl.define do
   
   factory :section do
     association :event
+    association :tournament
     min_age 9
     max_age 10
     min_rank 1

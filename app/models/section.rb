@@ -29,11 +29,11 @@ class Section < ActiveRecord::Base
   validate :event_is_active_in_system
   validate :section_is_not_already_in_system, :on => :create
   
-  before_create :valid_min_rank
-  before_create :valid_max_rank
+  # before_create :valid_min_rank
+  # before_create :valid_max_rank
 
-  before_update :valid_min_rank
-  before_update :valid_max_rank
+  # before_update :valid_min_rank
+  # before_update :valid_max_rank
 
   before_destroy :check_if_destroyable
   after_rollback :toggle_active_state

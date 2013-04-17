@@ -21,8 +21,10 @@ class DojoStudent < ActiveRecord::Base
   def end_previous_assignment 
     assignments = self.student.dojo_students.all
     previous = assignments.select{ |ds| ds.end_date.nil? }.first
-    previous.end_date = Date.today
-    previous.save! 
+    if !assignments.empty? and !previous.nil? 
+      previous.end_date = self.start_date
+      previous.save! 
+    end 
   end 
   
 end

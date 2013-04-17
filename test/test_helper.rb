@@ -51,11 +51,11 @@ class ActiveSupport::TestCase
   
   # Context for sections (requires events)
   def create_section_context
-    @wy_belt_sparring = FactoryGirl.create(:section, :event => @sparring, :location => 'Wiegand', :tournament_id => 1)
-    @wy_belt_breaking = FactoryGirl.create(:section, :event => @breaking, :location => 'Baker', :tournament_id => 5)
-    @r_belt_breaking = FactoryGirl.create(:section, :event => @breaking, :min_rank => 8, :max_rank => 10, :min_age => 13, :max_age => 15, :location => 'Skibo', :tournament_id => 3)
-    @r_belt_sparring = FactoryGirl.create(:section, :event => @sparring, :min_rank => 8, :max_rank => 10, :min_age => 13, :max_age => 15, :active => false, :location => 'Doherty', :tournament_id => 2) 
-    @bl_belt_breaking = FactoryGirl.create(:section, :event => @breaking, :min_rank => 11, :max_rank => nil, :min_age => 18, :max_age => nil, :location => 'Wiegand', :tournament_id => 1)
+    @wy_belt_sparring = FactoryGirl.create(:section, :event => @sparring, :location => 'Wiegand', :tournament => @bob_memorial)
+    @wy_belt_breaking = FactoryGirl.create(:section, :event => @breaking, :location => 'Baker', :tournament => @t1)
+    @r_belt_breaking = FactoryGirl.create(:section, :event => @breaking, :min_rank => 8, :max_rank => 10, :min_age => 13, :max_age => 15, :location => 'Skibo', :tournament => @pittsburgh_invitational)
+    @r_belt_sparring = FactoryGirl.create(:section, :event => @sparring, :min_rank => 8, :max_rank => 10, :min_age => 13, :max_age => 15, :active => false, :location => 'Doherty', :tournament => @steel_city_annual) 
+    @bl_belt_breaking = FactoryGirl.create(:section, :event => @breaking, :min_rank => 11, :max_rank => nil, :min_age => 18, :max_age => nil, :location => 'Wiegand', :tournament => @bob_memorial)
   end
   
   def remove_section_context

@@ -13,4 +13,10 @@ class UserTest < ActiveSupport::TestCase
 	should allow_value('alex@gmail.com').for(:email)
 	should_not allow_value('alex').for(:email)
 	should_not allow_value('@gmail.com').for(:email)
+	should_not allow_value(1).for(:email)
+
+	#Student_id validation
+	should allow_value(2).for(:student_id)
+	should_not allow_value("string").for(:student_id)
+
 end

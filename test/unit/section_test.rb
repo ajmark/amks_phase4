@@ -116,6 +116,22 @@ class SectionTest < ActiveSupport::TestCase
       @wy_belt_sparring.active = false
       assert @wy_belt_sparring.valid?
     end
+
+    should "have method to check if section min rank is valid" do 
+      @section = FactoryGirl.build(:section, :event => @sparring, :min_rank => 1, :min_age => 5, :tournament_id => 1)
+      assert @section.valid_min_rank
+      @bad_section = FactoryGirl.build(:section, :event =>@breaking, :min_rank => 0, :tournament_id => 1)
+      deny @bad_section.valid?
+    end 
+
+    should "have method to check if section max rank is valid" do 
+      @section = FactoryGirl.build(:section, :event => @breaking, :min_rank => 1, :max_rank => 3, :tournament_id => 2)
+      assert @section.valid_max_rank
+      @section2 = FactoryGirl.build(:section, :event => @breaking, :min_rank => 1, :tournament_id => 2)
+      assert @section2.valid_max_rank
+      @bad_section = FactoryGirl.build(:section, :event => @sparring, :min_rank => 1, :max_rank => 200, :tournament_id => 2)
+      deny @bad_section.valid?
+    end 
         
     should "have a scope to alphabetize sections by event name" do
       assert_equal ["Breaking", "Breaking", "Breaking", "Sparring", "Sparring"], Section.alphabetical.map{|s| s.event.name}
