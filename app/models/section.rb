@@ -25,16 +25,15 @@ class Section < ActiveRecord::Base
   validates_numericality_of :max_age, :only_integer => true, :greater_than_or_equal_to => :min_age, :allow_blank => true
   validates_numericality_of :event_id, :only_integer => true, :greater_than => 0, :message => "is not a valid event"
   validates_inclusion_of :active, :in => [true, false], :message => "must be true or false"
-  # validates_time :round_time
+  validates_time :round_time, :allow_blank => true
 
   validate :event_is_active_in_system
+  # validate :tournament_is_active_in_system
   validate :section_is_not_already_in_system, :on => :create
-  
-  # before_create :valid_min_rank
-  # before_create :valid_max_rank
 
-  # before_update :valid_min_rank
-  # before_update :valid_max_rank
+  
+  validate :valid_min_rank
+  validate :valid_max_rank
 
   before_destroy :check_if_destroyable
   after_rollback :toggle_active_state
@@ -96,5 +95,14 @@ class Section < ActiveRecord::Base
       errors.add(:min_rank, "already has a section for this event, age and rank")
     end
   end
+
+  # def tournament_is_active_in_system
+  #   # get an array of all active sections in the system
+  #   active_tournament_ids = Tournament.active.all.map{|t| t.id}
+  #   # add error unless the section id of the registration is in the array of active sections
+  #   unless active_tournaments_ids.include?(self.tournament_id)
+  #     errors.add(:tournament, "is not an active tournament in the system")
+  #   end
+  # end
 
 end

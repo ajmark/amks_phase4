@@ -34,7 +34,12 @@ class DojoStudentTest < ActiveSupport::TestCase
 			remove_dojo_student_context
 		end 
 
-	#Scopes
+    	# should "not allow dojo_students for inactive students" do
+    	#   @bad_dojo_student = FactoryGirl.build(:dojo_student, :dojo => @cmu, :student => @jason)
+    	#   deny @bad_dojo_student.valid?
+    	# end
+
+		#Scopes
 
 		should "have scope to gather active records only" do 
 			assert_equal ["Gruberman, Ed", "Hanson, Jen", "Hoover, Jason"], DojoStudent.current.map{|a| a.student.name}
@@ -48,7 +53,11 @@ class DojoStudentTest < ActiveSupport::TestCase
 			assert_equal ["CMU Dojo", "CMU Dojo", "UPitt Dojo", "UPitt Dojo"], DojoStudent.by_dojo.map{|a| a.dojo.name}
 		end 
 
-	#Methods
-		#end previous assignment
+		# should "have method to end previous assignment" do 
+		# 	@cmu = FactoryGirl.create(:dojo)
+		# 	@ed = FactoryGirl.build(:student)
+		# 	@ds = FactoryGirl.build(:dojo_student, :dojo => @cmu, :student => @ed)
+		# end 
+
 	end 
 end

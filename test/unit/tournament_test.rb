@@ -38,6 +38,11 @@ class TournamentTest < ActiveSupport::TestCase
 		deny @bad.valid?
 	end 
 
+	should "be able to toggle active state for tournament" do 
+		@bob_memorial.toggle_active_state
+		assert_equal ["Bob Memorial Tournament", "Inactive"], Tournament.inactive.alphabetical.all.map{|a| a.name}
+	end 
+
 	#Scopes
 	should "have scope to order chronologically" do 
 		assert_equal ["Steel City Annual", "Bob Memorial Tournament", "T1", "T2", "Pittsburgh Invitational"], Tournament.chronological.active.map{|a| a.name}
@@ -67,10 +72,5 @@ class TournamentTest < ActiveSupport::TestCase
 		assert_equal ["Inactive"], Tournament.inactive.alphabetical.map{|a| a.name}
 	end 
 
-	#Methods
-	###TODO####
-	#Only deleted if nobody has registered
-
 	end 
-
 end

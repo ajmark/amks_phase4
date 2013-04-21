@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :message => "does not match"
   validates_length_of :password, :minimum => 4, :message => "must be at least 4 characters long", :allow_blank => true
 
-  validate :student_is_active_in_system
+  validate :student_is_active_in_system, :on => :create
 
   private
   def student_is_active_in_system

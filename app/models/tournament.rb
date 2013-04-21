@@ -23,6 +23,11 @@ class Tournament < ActiveRecord::Base
   before_destroy :check_if_destroyable
   after_rollback :toggle_active_state
 
+  def toggle_active_state
+    self.active = !self.active
+    self.save!
+  end 
+
   private
   def check_if_destroyable
     if self.registrations.empty?
@@ -31,11 +36,5 @@ class Tournament < ActiveRecord::Base
       return false
     end 
   end 
-  
-  def toggle_active_state
-    self.active = !self.active
-    self.save!
-  end 
-    
 
 end

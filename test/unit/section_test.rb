@@ -8,48 +8,53 @@ class SectionTest < ActiveSupport::TestCase
   should have_many(:students).through(:registrations)
   
   # tests for min_rank
-  should validate_numericality_of(:min_rank)
-  should allow_value(1).for(:min_rank)
-  should allow_value(7).for(:min_rank)
-  should allow_value(10).for(:min_rank)
-  should allow_value(12).for(:min_rank)
-  should_not allow_value(0).for(:min_rank)
-  should_not allow_value(-1).for(:min_rank)
-  should_not allow_value(3.14159).for(:min_rank)
-  should_not allow_value(nil).for(:min_rank)
+  # should validate_numericality_of(:min_rank)
+  # should allow_value(1).for(:min_rank)
+  # should allow_value(7).for(:min_rank)
+  # should allow_value(10).for(:min_rank)
+  # should allow_value(12).for(:min_rank)
+  # should_not allow_value(0).for(:min_rank)
+  # should_not allow_value(-1).for(:min_rank)
+  # should_not allow_value(3.14159).for(:min_rank)
+  # should_not allow_value(nil).for(:min_rank)
   
-  # limited tests for max_rank
-  should validate_numericality_of(:max_rank)
-  should allow_value(nil).for(:max_rank)
+  # # limited tests for max_rank
+  # should validate_numericality_of(:max_rank)
+  # should allow_value(nil).for(:max_rank)
   
-  # tests for min_age
-  should validate_numericality_of(:min_age)
-  should allow_value(7).for(:min_age)
-  should allow_value(29).for(:min_age)
-  should allow_value(42).for(:min_age)
-  should_not allow_value(0).for(:min_age)
-  should_not allow_value(4).for(:min_age)
-  should_not allow_value(-1).for(:min_age)
-  should_not allow_value(3.14159).for(:min_age)
-  should_not allow_value(nil).for(:min_age)
+  # # tests for min_age
+  # should validate_numericality_of(:min_age)
+  # should allow_value(7).for(:min_age)
+  # should allow_value(29).for(:min_age)
+  # should allow_value(42).for(:min_age)
+  # should_not allow_value(0).for(:min_age)
+  # should_not allow_value(4).for(:min_age)
+  # should_not allow_value(-1).for(:min_age)
+  # should_not allow_value(3.14159).for(:min_age)
+  # should_not allow_value(nil).for(:min_age)
   
-  # limited tests for max_age
-  should validate_numericality_of(:max_age)
-  should allow_value(nil).for(:max_age)
+  # # limited tests for max_age
+  # should validate_numericality_of(:max_age)
+  # should allow_value(nil).for(:max_age)
+
+  # #test round time 
+  # should allow_value(Time.local(2000,01,01,11,0,0)).for(:round_time)
+  # should_not allow_value(1).for(:round_time)
+  # should_not allow_value("string").for(:round_time)
   
-  # tests for event_id
-  should allow_value(2).for(:event_id)
-  should allow_value(10).for(:event_id)
-  should allow_value(42).for(:event_id)
-  should_not allow_value(0).for(:event_id)
-  should_not allow_value(-1).for(:event_id)
-  should_not allow_value(3.14159).for(:event_id)
-  should_not allow_value(nil).for(:event_id)
+  # # tests for event_id
+  # should allow_value(2).for(:event_id)
+  # should allow_value(10).for(:event_id)
+  # should allow_value(42).for(:event_id)
+  # should_not allow_value(0).for(:event_id)
+  # should_not allow_value(-1).for(:event_id)
+  # should_not allow_value(3.14159).for(:event_id)
+  # should_not allow_value(nil).for(:event_id)
   
-  # test active
-  should allow_value(true).for(:active)
-  should allow_value(false).for(:active)
-  should_not allow_value(nil).for(:active)
+  # # test active
+  # should allow_value(true).for(:active)
+  # should allow_value(false).for(:active)
+  # should_not allow_value(nil).for(:active)
   
   # Context for rest of testing
   context "Creating context for sections" do
@@ -72,6 +77,66 @@ class SectionTest < ActiveSupport::TestCase
       assert_equal 15, @r_belt_sparring.max_age
     end
     
+    #Special Shoulda matchers
+
+    should "test values for min_rank" do 
+       assert @wy_belt_sparring.valid? 
+       @wy_belt_sparring.min_rank = 2 
+       assert @wy_belt_sparring.valid?
+       @wy_belt_sparring.min_rank = "string"
+       deny @wy_belt_sparring.valid?
+       @wy_belt_sparring.min_rank = 3.54231
+       deny @wy_belt_sparring.valid?
+    end     
+
+    should "test values for max_rank" do 
+       @wy_belt_sparring.valid? 
+       @wy_belt_sparring.max_rank = 4
+       assert @wy_belt_sparring.valid?
+       @wy_belt_sparring.max_rank = "string"
+       deny @wy_belt_sparring.valid?
+       @wy_belt_sparring.max_rank = 3.534354
+       deny @wy_belt_sparring.valid?
+    end 
+
+    should "test values for min_age" do 
+        assert @wy_belt_sparring.valid?
+        @wy_belt_sparring.min_age = 5
+        assert @wy_belt_sparring.valid?
+        @wy_belt_sparring.min_age = "string"
+        deny @wy_belt_sparring.valid?
+        @wy_belt_sparring.min_age = 2.243151
+        deny @wy_belt_sparring.valid?
+    end 
+
+    should "test values for max_age" do 
+        assert @wy_belt_sparring.valid?
+        @wy_belt_sparring.max_age = 10
+        assert @wy_belt_sparring.valid?
+        @wy_belt_sparring.max_age = "string"
+        deny @wy_belt_sparring.valid?
+        @wy_belt_sparring.max_age = 2.243151
+        deny @wy_belt_sparring.valid?
+    end 
+
+    should "test values for round time" do
+        @wy_belt_sparring.round_time = Time.local(2000,01,01,11,0,0)
+        assert @wy_belt_sparring.valid?
+        @wy_belt_sparring.round_time = "string"
+        deny @wy_belt_sparring.valid?
+        @wy_belt_sparring.round_time = 123
+        deny @wy_belt_sparring.valid?
+    end 
+
+    should "test for event id" do 
+        @wy_belt_sparring.event_id = 2
+        assert @wy_belt_sparring.valid?
+        @wy_belt_sparring.event_id = "string"
+        deny @wy_belt_sparring.valid?
+        @wy_belt_sparring.event_id = 1.24213
+        deny @wy_belt_sparring.valid?
+    end    
+
     should "does not allow sections for events not in the system" do
       @blocks = FactoryGirl.build(:event, :name => "Breaking Blocks")
       @bad_section = FactoryGirl.build(:section, :event => @blocks)  # @blocks is not in the database yet...
@@ -80,6 +145,11 @@ class SectionTest < ActiveSupport::TestCase
     
     should "does not allow sections for inactive events" do
       @bad_section = FactoryGirl.build(:section, :event => @weapons)  # white belts with weapons could be bad indeed...
+      deny @bad_section.valid?
+    end
+
+    should "does not allow sections for inactive tournaments" do
+      @bad_section = FactoryGirl.build(:section, :event => @breaking, :tournament => @inactive_tournament ) 
       deny @bad_section.valid?
     end
     
@@ -118,20 +188,26 @@ class SectionTest < ActiveSupport::TestCase
     end
 
     should "have method to check if section min rank is valid" do 
-      @section = FactoryGirl.build(:section, :event => @sparring, :min_rank => 1, :min_age => 5, :tournament_id => 1)
+      @section = FactoryGirl.build(:section, :event => @sparring, :min_rank => 5, :tournament => @bob_memorial)
       assert @section.valid_min_rank
-      @bad_section = FactoryGirl.build(:section, :event =>@breaking, :min_rank => 0, :tournament_id => 1)
-      deny @bad_section.valid?
+
+      @bad_section = FactoryGirl.build(:section, :event => @breaking, :min_rank => 2, :tournament => @t2)
+      deny @bad_section.valid_min_rank
     end 
 
     should "have method to check if section max rank is valid" do 
-      @section = FactoryGirl.build(:section, :event => @breaking, :min_rank => 1, :max_rank => 3, :tournament_id => 2)
+      @tournament = FactoryGirl.build(:tournament, :min_rank => 5, :max_rank => 10)
+      @tournament2 = FactoryGirl.build(:tournament, :min_rank => 3)
+
+      @section = FactoryGirl.build(:section, :event => @breaking, :min_rank => 5, :max_rank => 3, :tournament => @tournament2)
       assert @section.valid_max_rank
-      @section2 = FactoryGirl.build(:section, :event => @breaking, :min_rank => 1, :tournament_id => 2)
+      @section2 = FactoryGirl.build(:section, :event => @breaking, :min_rank => 5, :tournament => @tournament2)
       assert @section2.valid_max_rank
-      @bad_section = FactoryGirl.build(:section, :event => @sparring, :min_rank => 1, :max_rank => 200, :tournament_id => 2)
-      deny @bad_section.valid?
+      @bad_section = FactoryGirl.build(:section, :event => @sparring, :min_rank => 1, :max_rank => 200, :tournament => @tournament)
+      deny @bad_section.valid_max_rank
     end 
+
+    #Scopes
         
     should "have a scope to alphabetize sections by event name" do
       assert_equal ["Breaking", "Breaking", "Breaking", "Sparring", "Sparring"], Section.alphabetical.map{|s| s.event.name}

@@ -29,10 +29,12 @@ class UserTest < ActiveSupport::TestCase
 
 	context "Creating user context" do 
 		setup do 
+			create_student_context
 			create_user_context
 		end 
 
 		teardown do 
+			remove_student_context
 			remove_user_context
 		end 
 

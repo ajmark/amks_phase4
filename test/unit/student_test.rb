@@ -134,12 +134,12 @@ class StudentTest < ActiveSupport::TestCase
       assert_equal ["Henderson", "Hoover"], Student.ages_between(18,nil).alphabetical.all.map(&:last_name)
     end
 
-    # should "have class method to toggle the active state of a student" do 
-    #   @fred.toggle_active_state
-    #   assert_equal ["Gruberman", "Hoover"], Student.inactive.alphabetical.all.map(&:last_name)
-    #   @jason.toggle_active_state
-    #   assert_equal ["Gruberman"], Student.inactive.alphabetical.all.map(&:last_name)
-    # end 
+    should "have class method to toggle the active state of a student" do 
+      @fred.toggle_active_state
+      assert_equal ["Gruberman", "Hoover"], Student.inactive.alphabetical.all.map(&:last_name)
+      @jason.toggle_active_state
+      assert_equal ["Gruberman"], Student.inactive.alphabetical.all.map(&:last_name)
+    end 
     
     # start testing scopes...    
     should "have scope for alphabetical listing" do 

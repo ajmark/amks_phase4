@@ -89,7 +89,7 @@ class ActiveSupport::TestCase
     @pittsburgh_invitational = FactoryGirl.create(:tournament, :name => "Pittsburgh Invitational", :date => 1.month.from_now.to_date, :max_rank => 15)
     @inactive_tournament = FactoryGirl.create(:tournament, :name => "Inactive", :active => false)
     @t1 = FactoryGirl.create(:tournament, :name => "T1", :date => 1.day.from_now, :max_rank => 15)
-    @t2 = FactoryGirl.create(:tournament, :name => "T2", :date => 1.week.from_now)
+    @t2 = FactoryGirl.create(:tournament, :name => "T2", :date => 1.week.from_now, :min_rank => 5)
   end 
 
   def remove_tournament_context
@@ -103,7 +103,9 @@ class ActiveSupport::TestCase
 
   def create_dojo_context
     @cmu = FactoryGirl.create(:dojo)
+    sleep 1
     @pitt = FactoryGirl.create(:dojo, :name => "UPitt Dojo", :street => "4200 Forbes Ave", :zip => "15213")
+    sleep 1
     @joes = FactoryGirl.create(:dojo, :name => "Average Joe's Dojo", :active => false)
   end 
 
@@ -132,7 +134,7 @@ class ActiveSupport::TestCase
   end 
 
   def remove_user_context
-    @user_stu.destroy
+    @user_stu.delete
   end 
 
 end

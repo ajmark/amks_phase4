@@ -29,6 +29,7 @@ class RegistrationTest < ActiveSupport::TestCase
     setup do
       create_event_context
       create_student_context
+      create_tournament_context
       create_section_context
       create_registration_context
     end
@@ -36,6 +37,7 @@ class RegistrationTest < ActiveSupport::TestCase
     teardown do
       remove_event_context
       remove_student_context
+      remove_tournament_context
       remove_section_context
       remove_registration_context
     end
